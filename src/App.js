@@ -25,7 +25,9 @@ function App() {
 
   useEffect(() => {
     const escHandle = (e) => {
-      setInput("");
+      if (e.key === "Escape") {
+        setInput("");
+      }
     };
 
     window.addEventListener("keydown", escHandle);
