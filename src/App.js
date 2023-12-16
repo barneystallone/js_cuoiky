@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   AiOutlineSearch as Search,
   AiOutlinePlus as Plus,
@@ -23,9 +23,21 @@ function App() {
     return tasks;
   }, [filter, tasks]);
 
+  useEffect(() => {
+    const escHandle = (e) => {
+      console.log(e.key);
+    };
+
+    window.addEventListener("keydown", escHandle);
+
+    return () => {
+      window.removeEventListener("keydown", escHandle);
+    };
+  }, []);
+
   return (
     <section className="min-h-screen flex  justify-center mt-8   ">
-      <div className="flex  flex-col w-[500px] space-y-2 ">
+      <div className="flex  flex-col w-[500px]  ">
         {/* Title */}
         <div className="text-center uppercase text-3xl text-slate-600 font-semibold">
           Things to do
@@ -40,7 +52,7 @@ function App() {
               setTasks([...tasks, { content: input, isCheck: false }]);
             }
           }}
-          className="border-slate-500 border rounded-md p-2"
+          className="my-2 border-slate-500 border rounded-md p-2"
         >
           <input
             type="text"
@@ -51,6 +63,7 @@ function App() {
           />
         </form>
         {/* todo list */}
+
         {filterTasks.length > 0 &&
           filterTasks.map((task, index) => (
             <div
@@ -76,7 +89,7 @@ function App() {
           ))}
 
         {/* Search */}
-        <div className="px-4 py-2 bg-[#f5fcea] flex justify-between  ">
+        <div className=" px-4 py-2 bg-[#f5fcea] flex justify-between  ">
           <div className=" flex items-center">
             <Plus className="text-slate-600 " />
             <Search className="text-slate-600 ml-[2px]" />
@@ -102,6 +115,8 @@ function App() {
         </div>
 
         {/* Press Esc */}
+
+        <div className="bg-slate-200 text-center">Press "Esc" to cancel</div>
       </div>
     </section>
   );
