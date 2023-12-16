@@ -25,13 +25,13 @@ function App() {
 
   useEffect(() => {
     const escHandle = (e) => {
-      console.log(e.key);
+      setInput("");
     };
 
     window.addEventListener("keydown", escHandle);
 
     return () => {
-      window.removeEventListener("keydown", escHandle);
+      window.removeEventListener("keydown", escHandle``);
     };
   }, []);
 
@@ -48,7 +48,6 @@ function App() {
           onSubmit={(e) => {
             e.preventDefault();
             if (input.trim()) {
-              console.log(1);
               setTasks([...tasks, { content: input, isCheck: false }]);
             }
           }}
@@ -95,7 +94,7 @@ function App() {
             <Search className="text-slate-600 ml-[2px]" />
             <div className="-translate-y-[2px] mx-[16px] text-slate-300">|</div>
 
-            {tasks.length && <div clas>{tasks.length} items left</div>}
+            {tasks.length && <div>{tasks.length} items left</div>}
           </div>
 
           {/* left */}
